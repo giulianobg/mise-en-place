@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="1" author="sb">
+		<createTable tableName="events">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="name" type="varchar(60)">
+				<constraints nullable="false" />
+			</column>
+			<column name="date" type="date" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="2" author="sb">
+		<createTable tableName="dishes">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="kind" type="bigint" />
+			<column name="name" type="varchar(60)">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="varchar(255)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="3" author="sb">
+		<createTable tableName="preparations">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="interval" type="bigint" />
+			<column name="dish" type="bigint" />
+			<column name="description" type="varchar(255)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="4" author="sb">
+		<createTable tableName="dish_kinds">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="name" type="varchar(60)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="5" author="sb">
+		<createTable tableName="interval">
+			<column name="minutes" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="name" type="varchar(60)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="6" author="sb">
+		<addForeignKeyConstraint constraintName="fk_dishes_kind" 
+				referencedTableName="dish_kinds" referencedColumnNames="id" 
+				baseTableName="dishes" baseColumnNames="kind" />
+	</changeSet>
+
+	<changeSet id="7" author="sb">
+		<addForeignKeyConstraint constraintName="fk_preparations_interval" 
+				referencedTableName="interval" referencedColumnNames="minutes" 
+				baseTableName="preparations" baseColumnNames="interval" />
+		<addForeignKeyConstraint constraintName="fk_preparations_dish" 
+				referencedTableName="dishes" referencedColumnNames="id" 
+				baseTableName="preparations" baseColumnNames="dish" />
+	</changeSet>
+	
+	<changeSet id="8" author="sb">
+		<addColumn tableName="dishes">
+			<column name="id_event" type="bigint" />
+		</addColumn>
+		<addForeignKeyConstraint constraintName="fk_dishes_id_event" 
+				referencedTableName="events" referencedColumnNames="id" 
+				baseTableName="dishes" baseColumnNames="id_event" />
+	</changeSet>
+
+</databaseChangeLog>
