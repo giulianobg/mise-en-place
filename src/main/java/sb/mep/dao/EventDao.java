@@ -1,7 +1,5 @@
 package sb.mep.dao;
 
-import io.dropwizard.hibernate.AbstractDAO;
-
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -12,35 +10,29 @@ import sb.mep.api.Event;
 
 import com.google.common.base.Optional;
 
-public class EventDao extends AbstractDAO<Event> {
-	
-	private SessionFactory factory;
+/**
+ * 
+ * @author Giuliano Griffante
+ *
+ */
+public class EventDao extends DefaultDao<Event> {
 	
 	public EventDao(SessionFactory factory) {
 		super(factory);
-		this.factory = factory;
 	}
 
 	public Optional<Event> findById(Long id) {
-		Session s = factory.openSession();
+		Session s = getFactory().openSession();
 		try {
-			return Optional.fromNullable(get(id));
-		} finally {
-			s.close();
-		}
-	}
-
-	public Event create(Event event) {
-		Session s = factory.openSession();
-		try {
-			return persist(event);
+			Event e = (Event) s.get(Event.class, id);
+			return Optional.fromNullable(e);
 		} finally {
 			s.close();
 		}
 	}
 
 	public List<Event> findAll() {
-		Session s = factory.openSession();
+		Session s = getFactory().openSession();
 		try {
 			Criteria c = s.createCriteria(Event.class);
 			return c.list();

@@ -10,14 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="dishes")
 public class Dish implements Serializable {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sq_dishes")
+	@SequenceGenerator(name="sq_dishes",sequenceName="sq_dishes", allocationSize=1)
 	private Long id;
 	
 	private String name;
@@ -28,6 +29,10 @@ public class Dish implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_event")
 	private Event event;
+	
+	@ManyToOne
+	@JoinColumn(name="kind")
+	private DishKind kind;
 	
 	public Dish() {
 	}
@@ -54,6 +59,14 @@ public class Dish implements Serializable {
 	
 	public void setPreparations(List<Preparation> preparations) {
 		this.preparations = preparations;
+	}
+	
+	public DishKind getKind() {
+		return kind;
+	}
+	
+	public void setKind(DishKind kind) {
+		this.kind = kind;
 	}
 	
 	public Event getEvent() {

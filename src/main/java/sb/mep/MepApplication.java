@@ -5,11 +5,13 @@ import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
+import io.dropwizard.jersey.sessions.HttpSessionProvider;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
 
+import org.eclipse.jetty.server.session.SessionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +19,10 @@ import sb.mep.api.Dish;
 import sb.mep.api.DishKind;
 import sb.mep.api.Event;
 import sb.mep.api.Preparation;
+import sb.mep.client.resources.ClientEventResource;
 import sb.mep.client.resources.HtmlResource;
+import sb.mep.dao.Daos;
+import sb.mep.dao.DishDao;
 import sb.mep.dao.EventDao;
 import sb.mep.resources.DishResource;
 import sb.mep.resources.EventResource;
@@ -87,32 +92,25 @@ public class MepApplication extends Application<MepConfiguration> {
 		//		}
 
 		/* DAOs */
-		//		Daos.addDao(new CategoryDao(db));
-		//		Daos.addDao(new CityDao(db));
-		//		Daos.addDao(new CommentDao(db));
-		//		Daos.addDao(new ReviewDao(db));
-		//		Daos.addDao(new SessionDao(db));
-		//		Daos.addDao(new UserDao(db));
-		//		Daos.addDao(new VenueDao(db));
-		//		Daos.addDao(new VoteDao(db));
-
-		/* OAuth2 */
-		//		environment.addProvider(new QcAuthProvider<User>(new QcAuthenticator(), "QuantoCusta-OAuth"));
+		Daos.addDao(new EventDao(hibernateBundle.getSessionFactory()));
+		Daos.addDao(new DishDao(hibernateBundle.getSessionFactory()));
+//		Daos.addDao(new DishDao(hibernateBundle.getSessionFactory()));
 
 		/* Resources */
-		System.out.println(hibernateBundle.getSessionFactory());
-		environment.jersey().register(new EventResource(new EventDao(hibernateBundle.getSessionFactory())));
-		environment.jersey().register(new DishResource());
+		environment.jersey().register(new EventResource(Daos.get(EventDao.class)));
+		environment.jersey().register(new DishResource(Daos.get(DishDao.class)));
 
 		/* Client resources */
 		environment.jersey().register(new HtmlResource());
-		//		environment.addResource(new SessionResource());
-		//		environment.addResource(new UserResource());
-		//		environment.addResource(new VenueResource());
-		//		environment.addResource(new VoteResource());
-
+		environment.jersey().register(new ClientEventResource());
+		
+		environment.jersey().register(HttpSessionProvider.class);
+		environment.servlets().setSessionHandler(new SessionHandler());
+		
+//		environment.admin().
+		
 		/* Health checkers */
-		//		environment.addHealthCheck(new MongoHealthCheck(null));
+		//environment.healthChecks().(new MongoHealthCheck(null));
 
 		/* Cache */
 		//		Cache<String, String> c1 = CacheBuilder.newBuilder().build();

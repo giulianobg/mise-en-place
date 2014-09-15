@@ -9,14 +9,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="events")
 public class Event implements Serializable {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sq_events")
+	@SequenceGenerator(name="sq_events",sequenceName="sq_events", allocationSize=1)
 	private Long id;
 	
 	private String name;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html ng-app="app" lang="pt-BR">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,16 +8,28 @@
 
 		<title>Mise en place</title>
 
-		<!-- Bootstrap core and jQuery Mobile CSS -->
-		<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+		<#include "components/head.ftl">
 
-		<!-- Add custom CSS here -->
-		<link href="" rel="stylesheet">
 	</head>
 
 	<body>
 	
-		hello world
+		<#include "components/nav.ftl">
+	
+		<div class="container">
+		
+			<div class="col-sm-12">
+				<a href="/#/event" class="btn btn-primary btn-outline" ><i class="fa fa-plus"></i> Novo evento</a>
+				<a href="/#/blank" class="btn btn-default btn-outline"><i class="fa fa-plus"></i> Blank</a>
+				
+				<hr>
+			</div>
+			
+			<div class="col-sm-12" ng-view class="view-animate"></div>
+		</div>
 	
 	</body>
+	<#include "components/modal.ftl">
+	
+	<#include "components/scripts.ftl">
 </html>

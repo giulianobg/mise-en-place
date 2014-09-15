@@ -5,6 +5,7 @@ import io.dropwizard.jersey.params.LongParam;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -19,7 +20,7 @@ import sb.mep.api.Event;
 import sb.mep.dao.EventDao;
 
 @Path("/api/event")
-@Produces("application/json; charset=utf-8")
+@Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class EventResource extends BaseResouce {
 	
@@ -30,7 +31,6 @@ public class EventResource extends BaseResouce {
 	}
 	
 	@GET
-	@Path("fetch")
 	public Response fetch() {
 		List<Event> events = dao.findAll();
 		return Response.ok(DataResponse.build(events)).build();
@@ -45,13 +45,25 @@ public class EventResource extends BaseResouce {
 	}
 	
 	@POST
-	public Response save() {
-		return null;
+	public Response save(Event event) {
+		event = dao.create(event);
+		return Response.ok(DataResponse.build(event)).build();
 	}
 	
 	@PUT
-	public Response update() {
-		return null;
+	@Path("{id}")
+	public Response update(@PathParam("id") LongParam id) {
+		Event event = dao.findById(id.get()).get();
+		event = dao.update(event);
+		return Response.ok(DataResponse.build(event)).build();
+	}
+	
+	@DELETE
+	@Path("{id}")
+	public Response delete(@PathParam("id") LongParam id) {
+		Event event = dao.findById(id.get()).get();
+		dao.delete(event);
+		return fetch();
 	}
 
 }
