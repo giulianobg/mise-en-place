@@ -1,28 +1,30 @@
-<div class="modal-header">
-	<h4 class="modal-title">Novo prato</h4>
+<div class="section" ng-controller="DishCtrl">
+	<h3><a href="/#!/event/{{event.id}}"><i class="fa fa-arrow-left"></i></a> Novo prato</h3>
+	<div class="section-tools">
+	</div>
 </div>
-<div class="modal-body">
+<div>
 
-	<form name="dishForm" class="form-horizontal" ng-controller="DishCtrl" novalidate ng-submit="save()">
+	<form name="dishForm" class="" ng-controller="DishCtrl" novalidate ng-submit="save()">
 	
-		<input type="hidden" ng-model="data.event.id" value="{{event.id}}">
+		<p class="lead">
+		</p>
 	
 		<div class="form-group">
-			<label class="col-sm-2 control-label">Nome</label>
-			<div class="col-sm-10">
-				<input type="text" ng-model="data.name" class="form-control">
-			</div>
+			<label class="control-label">Nome</label>
+			<input type="text" ng-model="dish.name" class="form-control">
 		</div>
 	
 		<div class="form-group">
-			<label class="col-sm-2 control-label">Tipo</label>
-			<div class="col-sm-10">
-				<select class="form-control" ng-model="data.kind.id">
-					<option value="1">Entrada</option>
-					<option value="2">Principal</option>
-					<option value="3">Sobremesa</option>
-				</select>
-			</div>
+			<label class="control-label">Tipo</label>
+			<select class="form-control" ng-model="dish.kind.id" ng-controller="DishKindCtrl">
+				<option value="{{kind.id}}" ng-repeat="kind in kinds">{{kind.name}}</option>
+			</select>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label">Description</label>
+			<textarea ng-model="dish.description" class="form-control"></textarea>
 		</div>
 		
 		<div class="form-actions">
@@ -30,5 +32,5 @@
 		</div>
 	
 	</form>
-
+	
 </div>

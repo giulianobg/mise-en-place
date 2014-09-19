@@ -1,21 +1,24 @@
-<div class="modal-header">
-	<h4 class="modal-title">Novo evento</h4>
-</div>
-<div class="modal-body">
-
-	<form name="eventForm" class="form-horizontal" ng-controller="EventCtrl" novalidate ng-submit="save()">
-	
-		<div class="form-group">
-			<label class="col-sm-2 control-label">Nome</label>
-			<div class="col-sm-10">
+<div ng-controller="EventCtrl">
+	<div class="section">
+		<h3><a href="/#!/event"><i class="fa fa-arrow-left"></i></a> <span class="text-muted">Eventos</span> / <span>{{data.name}}</span></h3>
+		<div class="section-tools">
+		</div>
+	</div>
+	<div>
+		<form name="eventForm" class="" novalidate ng-submit="save()">
+		
+			<p class="lead">
+			</p>
+		
+			<div class="form-group">
+				<label class="control-label">Nome</label>
 				<input type="text" ng-model="data.name" class="form-control">
 			</div>
-		</div>
-	
-		<div class="form-actions">
-			<button type="submit" class="btn btn-primary">Ok</button>
-		</div>
-	
-	</form>
-
+		
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">Ok</button>
+			</div>
+		
+		</form>
+	</div>
 </div>

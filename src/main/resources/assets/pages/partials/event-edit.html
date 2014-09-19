@@ -1,21 +1,22 @@
 <div class="section">
-	<h3><a href="/#/event" class="btn btn-default"><i class="fa fa-back"></i></a> <span class="muted">{{event.name}}</span> / Pratos</h3>
-	<div class="section-tools pull-right">
+	<h3><a href="/#!/event"><i class="fa fa-arrow-left"></i></a> <span class="text-muted">{{event.name}}</span> / Pratos</h3>
+	<div class="section-tools">
+		<a href="/#!/event/{{event.id}}/dish/new" class="btn btn-default btn-sm"><i class="fa fa-plus"></i></a>
 	</div>
 </div>
-<div class="list-group" ng-controller="DishCtrl">
-	<a href="/#/event/1/dish/1" class="list-group-item" ng-repeat="dish in dishes">
-		<span class="label label-yellow">tipo do</span>
-		nome do prato
-	</a>
-</div>
-<div>
-	<input id="include-url" type="hidden" ng-model="include">
-	<a id="open-form" onclick="$('#form-container').removeClass('hidden');$(this).addClass('hidden')" class="btn btn-default">
-		<i class="fa fa-plus"></i> Dish
-	</a>
+<div class="hidden">
+	<form>
+		<label>Name</label>
+		<input ng-model="event.name" class="form-control">
+		
+		<label>Data</label>
+		<input ng-model="event.date" disabled="disabled" class="form-control">
+	</form>
 </div>
 
-<div id="form-container" class="panel panel-default hidden">
-	<ng-include src="'/assets/pages/partials/dish-new.html'"></ng-include>
+<div class="list-group">
+	<a href="/#!/event/{{event.id}}/dish/{{dish.id}}" class="list-group-item" ng-repeat="dish in event.dishes">
+		<span class="label bg-orange">{{dish.kind.name}}</span>
+		{{dish.name}}
+	</a>
 </div>

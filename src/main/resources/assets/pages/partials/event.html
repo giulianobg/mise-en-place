@@ -1,23 +1,18 @@
 <div class="section">
 	<h3>Eventos</h3>
-	<div class="section-tools pull-right">
+	<div class="section-tools">
+		<a href="/#!/event/new" class="btn btn-default btn-sm"><i class="fa fa-plus"></i></a>
 	</div>
 </div>
 <div class="list-group" ng-controller="EventCtrl">
-	<div class="list-group-item" ng-repeat="event in events">
-		<span class="badge badge-info">0 pratos </span>
-		<a href="/#/event/{{event.id}}">{{event.name}}</a>
-		
-		<button class="btn btn-default pull-right" ng-click="remove(event)">X</button>
-	</div>
-</div>
-<div>
-	<input id="include-url" type="hidden" ng-model="include">
-	<a id="open-form" onclick="$('#form-container').removeClass('hidden');$(this).addClass('hidden')" class="btn btn-default">
-		<i class="fa fa-plus"></i> Event
+	<a href="/#!/event/{{event.id}}" class="list-group-item" ng-repeat="event in events">
+		<span class="badge badge-default">{{event.dishes.length}} pratos </span>
+		{{event.name}}
 	</a>
 </div>
-
-<div id="form-container" class="panel panel-default hidden">
-	<ng-include src="'/assets/pages/partials/event-new.html'"></ng-include>
+<div class="hidden">
+	<input id="include-url" type="hidden" ng-model="include">
+	<a id="open-form" onclick="$('#form-container').removeClass('hidden');$(this).addClass('hidden')" class="btn btn-default">
+		<i class="fa fa-plus"></i> Evento
+	</a>
 </div>

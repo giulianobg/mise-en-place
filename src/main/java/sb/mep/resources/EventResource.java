@@ -33,6 +33,7 @@ public class EventResource extends BaseResouce {
 	@GET
 	public Response fetch() {
 		List<Event> events = dao.findAll();
+		System.out.println(events.size());
 		return Response.ok(DataResponse.build(events)).build();
 	}
 	

@@ -16,55 +16,53 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import sb.mep.api.DataResponse;
-import sb.mep.api.Dish;
-import sb.mep.dao.DishDao;
+import sb.mep.api.Interval;
+import sb.mep.dao.IntervalDao;
 
-@Path("/api/dish")
+@Path("/api/interval")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class DishResource extends BaseResouce {
+public class IntervalResource extends BaseResouce {
 	
-	private DishDao dao;
+	private IntervalDao dao;
 	
-	public DishResource(DishDao dao) {
+	public IntervalResource(IntervalDao dao) {
 		this.dao = dao;
 	}
 	
 	@GET
 	public Response fetch() {
-		List<Dish> dishes = dao.findAll();
+		List<Interval> dishes = dao.findAll();
 		return Response.ok(DataResponse.build(dishes)).build();
 	}
 	
 	@GET
 	@Path("{id}")
 	public Response get(@PathParam("id") LongParam id) {
-		Dish dish = dao.findById(id.get()).get();
-		return Response.ok(DataResponse.build(dish)).build();
+		Interval interval = dao.findById(id.get()).get();
+		return Response.ok(DataResponse.build(interval)).build();
 	}
 	
 	@POST
-	public Response save(Dish dish) {
-		System.out.println(dish);
-		System.out.println(dish.getEvent());
-		System.out.println(dish.getKind());
-		dish = dao.create(dish);
-		return Response.ok(DataResponse.build(dish)).build();
+	public Response save(Interval interval) {
+		System.out.println(interval);
+		interval = dao.create(interval);
+		System.out.println(interval);
+		return Response.ok(DataResponse.build(interval)).build();
 	}
 	
 	@PUT
 	@Path("{id}")
-	public Response update(@PathParam("id") LongParam id) {
-		Dish dish = dao.findById(id.get()).get();
-		dish = dao.update(dish);
-		return Response.ok(DataResponse.build(dish)).build();
+	public Response update(Interval interval) {
+		interval = dao.update(interval);
+		return Response.ok(DataResponse.build(interval)).build();
 	}
 	
 	@DELETE
 	@Path("{id}")
 	public Response delete(@PathParam("id") LongParam id) {
-		Dish dish = dao.findById(id.get()).get();
-		dao.delete(dish);
+		Interval interval = dao.findById(id.get()).get();
+		dao.delete(interval);
 		return fetch();
 	}
 

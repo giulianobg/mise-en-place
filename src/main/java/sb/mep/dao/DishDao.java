@@ -24,7 +24,8 @@ public class DishDao extends DefaultDao<Dish> {
 	public Optional<Dish> findById(Long id) {
 		Session s = getFactory().openSession();
 		try {
-			return Optional.fromNullable(get(id));
+			Dish dish = (Dish) s.get(Dish.class, id);
+			return Optional.fromNullable(dish);
 		} finally {
 			s.close();
 		}

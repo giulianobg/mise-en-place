@@ -1,0 +1,22 @@
+<div class="section">
+	<h4 class="modal-title">Novo tipo de prato</h4>
+</div>
+<div class="section" ng-controller="DishCtrl">
+	<h3><a href="/#!/dish/kinds"><i class="fa fa-arrow-left"></i></a> Novo tipo de prato</h3>
+	<div class="section-tools">
+	</div>
+</div>
+<div>
+	<form name="dishKindForm" ng-controller="DishKindCtrl" novalidate ng-submit="update()">
+	
+		<div class="form-group">
+			<label class="control-label">Nome</label>
+			<input type="text" ng-model="kind.name" class="form-control">
+		</div>
+	
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">Ok</button>
+		</div>
+	
+	</form>
+</div>

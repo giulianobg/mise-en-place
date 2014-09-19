@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 @Table(name="events")
 public class Event implements Serializable {
@@ -25,6 +28,7 @@ public class Event implements Serializable {
 	private Date date;
 	
 	@OneToMany(mappedBy="event")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Dish> dishes;
 	
 	public Event() {
@@ -60,6 +64,11 @@ public class Event implements Serializable {
 	
 	public void setDishes(List<Dish> dishes) {
 		this.dishes = dishes;
+	}
+	
+	@Override
+	public String toString() {
+		return "[EVENT id=" + getId() + "] " + getName();
 	}
 
 }
