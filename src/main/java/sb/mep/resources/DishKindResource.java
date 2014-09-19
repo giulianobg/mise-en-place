@@ -16,55 +16,51 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import sb.mep.api.DataResponse;
-import sb.mep.api.Dish;
-import sb.mep.dao.DishDao;
+import sb.mep.api.DishKind;
+import sb.mep.dao.DishKindDao;
 
-@Path("/api/dish")
+@Path("/api/dish-kind")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class DishResource extends BaseResouce {
+public class DishKindResource extends BaseResouce {
 	
-	private DishDao dao;
+	private DishKindDao dao;
 	
-	public DishResource(DishDao dao) {
+	public DishKindResource(DishKindDao dao) {
 		this.dao = dao;
 	}
 	
 	@GET
 	public Response fetch() {
-		List<Dish> dishes = dao.findAll();
+		List<DishKind> dishes = dao.findAll();
 		return Response.ok(DataResponse.build(dishes)).build();
 	}
 	
 	@GET
 	@Path("{id}")
 	public Response get(@PathParam("id") LongParam id) {
-		Dish dish = dao.findById(id.get()).get();
-		return Response.ok(DataResponse.build(dish)).build();
+		DishKind dishKind = dao.findById(id.get()).get();
+		return Response.ok(DataResponse.build(dishKind)).build();
 	}
 	
 	@POST
-	public Response save(Dish dish) {
-		System.out.println(dish);
-		System.out.println(dish.getEvent());
-		System.out.println(dish.getKind());
-		dish = dao.create(dish);
-		return Response.ok(DataResponse.build(dish)).build();
+	public Response save(DishKind dishKind) {
+		dishKind = dao.create(dishKind);
+		return Response.ok(DataResponse.build(dishKind)).build();
 	}
 	
 	@PUT
 	@Path("{id}")
-	public Response update(@PathParam("id") LongParam id) {
-		Dish dish = dao.findById(id.get()).get();
-		dish = dao.update(dish);
-		return Response.ok(DataResponse.build(dish)).build();
+	public Response update(DishKind dishKind) {
+		dishKind = dao.update(dishKind);
+		return Response.ok(DataResponse.build(dishKind)).build();
 	}
 	
 	@DELETE
 	@Path("{id}")
 	public Response delete(@PathParam("id") LongParam id) {
-		Dish dish = dao.findById(id.get()).get();
-		dao.delete(dish);
+		DishKind dishKind = dao.findById(id.get()).get();
+		dao.delete(dishKind);
 		return fetch();
 	}
 

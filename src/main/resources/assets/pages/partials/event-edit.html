@@ -1,0 +1,22 @@
+<div class="section">
+	<h3><a href="/#!/event"><i class="fa fa-arrow-left"></i></a> <span class="text-muted">{{event.name}}</span> / Pratos</h3>
+	<div class="section-tools">
+		<a href="/#!/event/{{event.id}}/dish/new" class="btn btn-default btn-sm"><i class="fa fa-plus"></i></a>
+	</div>
+</div>
+<div class="hidden">
+	<form>
+		<label>Name</label>
+		<input ng-model="event.name" class="form-control">
+		
+		<label>Data</label>
+		<input ng-model="event.date" disabled="disabled" class="form-control">
+	</form>
+</div>
+
+<div class="list-group">
+	<a href="/#!/event/{{event.id}}/dish/{{dish.id}}" class="list-group-item" ng-repeat="dish in event.dishes">
+		<span class="label bg-orange">{{dish.kind.name}}</span>
+		{{dish.name}}
+	</a>
+</div>

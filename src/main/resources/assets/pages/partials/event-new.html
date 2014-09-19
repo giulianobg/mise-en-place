@@ -1,0 +1,24 @@
+<div ng-controller="EventCtrl">
+	<div class="section">
+		<h3><a href="/#!/event"><i class="fa fa-arrow-left"></i></a> <span class="text-muted">Eventos</span> / <span>{{data.name}}</span></h3>
+		<div class="section-tools">
+		</div>
+	</div>
+	<div>
+		<form name="eventForm" class="" novalidate ng-submit="save()">
+		
+			<p class="lead">
+			</p>
+		
+			<div class="form-group">
+				<label class="control-label">Nome</label>
+				<input type="text" ng-model="data.name" class="form-control">
+			</div>
+		
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">Ok</button>
+			</div>
+		
+		</form>
+	</div>
+</div>

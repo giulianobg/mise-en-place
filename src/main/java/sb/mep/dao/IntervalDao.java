@@ -5,10 +5,8 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.internal.CriteriaImpl;
 
-import sb.mep.api.Dish;
-import sb.mep.api.Event;
+import sb.mep.api.Interval;
 
 import com.google.common.base.Optional;
 
@@ -17,26 +15,26 @@ import com.google.common.base.Optional;
  * @author Giuliano Griffante
  *
  */
-public class EventDao extends DefaultDao<Event> {
+public class IntervalDao extends DefaultDao<Interval> {
 	
-	public EventDao(SessionFactory factory) {
+	public IntervalDao(SessionFactory factory) {
 		super(factory);
 	}
 
-	public Optional<Event> findById(Long id) {
+	public Optional<Interval> findById(Long id) {
 		Session s = getFactory().openSession();
 		try {
-			Event e = (Event) s.get(Event.class, id);
-			return Optional.fromNullable(e);
+			Interval interval = (Interval) s.get(Interval.class, id);
+			return Optional.fromNullable(interval);
 		} finally {
 			s.close();
 		}
 	}
 
-	public List<Event> findAll() {
+	public List<Interval> findAll() {
 		Session s = getFactory().openSession();
 		try {
-			Criteria c = s.createCriteria(Event.class);
+			Criteria c = s.createCriteria(Interval.class);
 			return c.list();
 		} finally {
 			s.close();

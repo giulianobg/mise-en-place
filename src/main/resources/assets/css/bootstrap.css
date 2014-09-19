@@ -1006,6 +1006,9 @@ hr {
 .text-dark {
   color: #555;
 }
+.text-pink {
+  color: #ec87c0;
+}
 .bg-green {
   color: #fff;
   background-color: #5cb85c;
@@ -1037,6 +1040,10 @@ hr {
 .bg-dark {
   color: #fff;
   background-color: #555;
+}
+.bg-pink {
+  color: #fff;
+  background-color: #ec87c0;
 }
 h1,
 h2,
@@ -4831,6 +4838,18 @@ a.list-group-item.active > .badge,
 .nav-pills > li > a > .badge {
   margin-left: 3px;
 }
+.badge-success {
+  background-color: #5cb85c;
+}
+.badge-info {
+  background-color: #5bc0de;
+}
+.badge-warning {
+  background-color: #f0ad4e;
+}
+.badge-danger {
+  background-color: #d9534f;
+}
 .jumbotron {
   padding: 30px;
   margin-bottom: 30px;
@@ -5003,6 +5022,10 @@ a.thumbnail.active {
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
           box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+}
+.progress-thin {
+  height: 3px;
+  margin: 9px 0;
 }
 .progress-bar {
   float: left;

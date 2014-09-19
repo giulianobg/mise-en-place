@@ -7,22 +7,12 @@ import javax.ws.rs.Produces;
 import sb.mep.client.views.SimplePageView;
 import sb.mep.resources.BaseResouce;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.jersey.api.client.Client;
-
 @Path("/")
 @Produces("text/html; charset=utf-8")
 public class HtmlResource extends BaseResouce {
 	
-//	private QuantoCustaClientConfiguration configuration;
-	
-	private Client client;
-	private ObjectMapper mapper;
-	
 	public HtmlResource() {
 //		this.configuration = configuration;
-		client = Client.create();
-		mapper = new ObjectMapper();
 	}
 	
 	@GET

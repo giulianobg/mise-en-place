@@ -1,0 +1,17 @@
+<div class="section">
+	<h3><span class="text-muted">Configurações</span> / Tipos de pratos</h3>
+	<div class="section-tools pull-right">
+	</div>
+</div>
+<div class="list-group" ng-controller="DishKindCtrl">
+	<div class="list-group-item" ng-repeat="kind in kinds">
+		<a href="/#!/dish/kinds/{{kind.id}}/edit">{{kind.name}}</a>
+		
+		<button class="btn btn-link btn-xs pull-right" ng-click="remove(kind)"><i class="fa fa-remove text-red"></i></button>
+	</div>
+</div>
+<div>
+	<a href="/#!/dish/kinds/new" class="btn btn-default">
+		<i class="fa fa-plus"></i> Tipo de prato
+	</a>
+</div>

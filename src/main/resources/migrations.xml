@@ -84,5 +84,17 @@
 				referencedTableName="events" referencedColumnNames="id" 
 				baseTableName="dishes" baseColumnNames="id_event" />
 	</changeSet>
+	
+	<changeSet id="9" author="sb">
+		<createSequence sequenceName="sq_events"/>
+		<createSequence sequenceName="sq_dishes"/>
+		<createSequence sequenceName="sq_dish_kinds"/>
+		<createSequence sequenceName="sq_intervals"/>
+		<createSequence sequenceName="sq_preparations"/>
+	</changeSet>
+	
+	<!-- <changeSet id="10" author="sb">
+		<dropSequence sequenceName="sq_intervals"/>
+	</changeSet> -->
 
 </databaseChangeLog>

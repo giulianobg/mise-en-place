@@ -1,0 +1,14 @@
+<div ng-controller="DishGetCtrl">
+	<div class="section">
+		<h3><a href="/#!/event/{{event.id}}"><i class="fa fa-arrow-left"></i></a>
+		<span class="text-muted">{{event.name}}</span> / <span class="text-muted">{{dish.name}}</span> / Preparação</h3>
+		<div class="section-tools">
+			<a href="/#!/event/{{event.id}}/dish/{{dish.id}}/prep/new" class="btn btn-default btn-sm"><i class="fa fa-plus"></i></a>
+		</div>
+	</div>
+	<div class="list-group">
+		<a href="/#!/event/{{event.id}}/dish/{{dish.id}}/prep/{{prep.id}}/edit" class="list-group-item" ng-repeat="prep in dish.preparations">
+			<strong>{{prep.interval.minute}}'</strong> {{prep.description}}
+		</a>
+	</div>
+</div>

@@ -1,0 +1,31 @@
+<div class="section" ng-controller="PreparationCtrl">
+	<h3><a href="/#!/event/{{event.id}}/dish/{{event.dish.id}}"><i class="fa fa-arrow-left"></i></a> Adicionar preparação</h3>
+	<div class="section-tools">
+	</div>
+</div>
+<div>
+
+	<form name="prepForm" class="" ng-controller="PreparationCtrl" novalidate ng-submit="save()">
+	
+		<p class="lead">
+		</p>
+	
+		<div class="form-group">
+			<label class="control-label">Intervalo</label>
+			<select class="form-control" ng-model="prep.interval.minute">
+				<option value="{{interval.minute}}" ng-repeat="interval in intervals">{{interval.minute}}</option>
+			</select>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label">Descrição da tarefa</label>
+			<textarea ng-model="prep.description" class="form-control"></textarea>
+		</div>
+		
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">Ok</button>
+		</div>
+	
+	</form>
+	
+</div>

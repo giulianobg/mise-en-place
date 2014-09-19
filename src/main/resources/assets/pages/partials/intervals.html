@@ -1,0 +1,15 @@
+<div class="section">
+	<h3><span class="text-muted">Configurações</span> / Intervalos</h3>
+	<div class="section-tools">
+	</div>
+</div>
+<div class="list-group" ng-controller="IntervalCtrl">
+	<a href="/#!/intervals/{{interval.minute}}/edit" class="list-group-item" ng-repeat="interval in intervals">
+		{{interval.minute}}
+	</a>
+</div>
+<div>
+	<a href="/#!/intervals/new" class="btn btn-default">
+		<i class="fa fa-plus"></i> Intervalo
+	</a>
+</div>
